@@ -62,16 +62,27 @@ let auth_token = "bUuexcdNEzGqu3E1Uz59xj1hZyEhRbtS";
 
 let folder_id = "0";
 
-function boxAPI (url, api_key) {
-	$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'" + url +	"%26api_key%3D" + api_key + "'&amp;format=json&amp;diagnostics=true",
-			   function(response) {
-			   			console.log(response)
-						window.ticket = response.query.results.response.ticket;
-						console.log(window.ticket)
-						window.location.href = 'https://m.box.net/api/1.0/auth/' + ticket;
+let ticket;
 
-				}
-			  );
+// function boxAPI (url, api_key) {
+// 	$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'" + url +	"%26api_key%3D" + api_key + "'&amp;format=json&amp;diagnostics=true",
+// 			   function(response) {
+// 			   			console.log(response)
+// 						window.ticket = response.query.results.response.ticket;
+// 						console.log(window.ticket)
+// 						window.location.href = 'https://m.box.net/api/1.0/auth/' + ticket;
+
+// 				}
+// 			  );
+// }
+
+function testAPI (api_key) {
+	$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_ticket%26api_key%3D" + api_key + "'&amp;format=json&amp;diagnostics=true",
+	function(response) {
+		console.log(response)
+		window.ticket = response.query.results.response.ticket;
+		window.location.href = 'https://m.box.net/api/1.0/auth/' + ticket;
+	});
 }
 
 function getMeAFile (token, key, folder) { 
@@ -93,10 +104,12 @@ $(".submit").on("click", function (){
 
 	console.log("BLAHHAHAH");
 
-	boxAPI(BaseUrl, "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2");
+	testAPI(api_key);
+
+	// boxAPI(BaseUrl, "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2");
 	// event.preventDefault();
 
-	getMeAFile(auth_token, api_key, folder_id);
+	//getMeAFile(auth_token, api_key, folder_id);
 
 	// console.log(uploadFile);
 
