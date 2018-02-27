@@ -59,7 +59,7 @@ const BaseUrl = "https://www.box.net/api/1.0/rest?action=get_ticket&api_key=fdf4
 let api_key = "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2";
 
 function boxAPI (url, api_key, callback) {
-	$.getJSON("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'		https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_ticket%26api_key%3D" + api_key + "'&amp;format=json&amp;diagnostics=true",
+	$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'		https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_ticket%26api_key%3D" + api_key + "'&amp;format=json&amp;diagnostics=true",
 			   function(response) {
 						window.ticket = response.query.results.response.ticket;
 						window.location.href = 'https://m.box.net/api/1.0/auth/' + ticket;
