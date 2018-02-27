@@ -9,32 +9,32 @@
 
 <script type="text/javascript">
 
-var options = {
-    clientId: 'fdf45ekhg6vamm0nbo8ul9njzdkfe3p2',
-    linkType: 'direct',
-    multiselect: 'true'
-};
+// var options = {
+//     clientId: 'fdf45ekhg6vamm0nbo8ul9njzdkfe3p2',
+//     linkType: 'direct',
+//     multiselect: 'true'
+// };
 
-var boxSelect = new BoxSelect(options);
+// var boxSelect = new BoxSelect(options);
 
-// Register a success callback handler
-boxSelect.success(function(response) {
-    console.log(response);
-});
-// Register a cancel callback handler
-boxSelect.cancel(function() {
-    console.log("The user clicked cancel or closed the popup");
-});
+// // Register a success callback handler
+// boxSelect.success(function(response) {
+//     console.log(response);
+// });
+// // Register a cancel callback handler
+// boxSelect.cancel(function() {
+//     console.log("The user clicked cancel or closed the popup");
+// });
 
 
 
-var uploadFile = $("#file");
+// var uploadFile = $("#file");
 
-var uploadUrl = 'https://upload.box.com/api/2.0/files/content';
+// var uploadUrl = 'https://upload.box.com/api/2.0/files/content';
 
-var headers = {
-    Authorization: "bUuexcdNEzGqu3E1Uz59xj1hZyEhRbtS"
-};
+// var headers = {
+//     Authorization: "bUuexcdNEzGqu3E1Uz59xj1hZyEhRbtS"
+// };
 
 
 
@@ -48,13 +48,34 @@ var headers = {
 
 // form.append('parent_id', '0');
 
+const BaseUrl = "https://www.box.net/api/1.0/rest?action=get_ticket&api_key=fdf45ekhg6vamm0nbo8ul9njzdkfe3p2";
+
+let window.api_key = "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2";
+
+function boxAPI (url, api_key, callback) {
+	$.getJSON("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'		https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_ticket%26api_key%3D" + window.		 api_key + "'&amp;format=json&amp;diagnostics=true",
+			   function(response) {
+						window.ticket = response.query.results.response.ticket;
+						window.location.href = 'https://m.box.net/api/1.0/auth/' + ticket;
+				}
+			  );
+}
+
+
+
 
 $("#submit").on("click", function (){
+
+	event.preventDefault();
+
+	boxAPI(BaseUrl, "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2", function(response){
+		console.log(response)
+	});
 	// event.preventDefault();
 
 	// console.log(uploadFile);
 
-	boxSelect.launchPopup();
+	// boxSelect.launchPopup();
 
 	// var baseURL = "https://www.box.net/api/1.0/rest?action=get_ticket&api_key=fdf45ekhg6vamm0nbo8ul9njzdkfe3p2"
 
