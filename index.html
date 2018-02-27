@@ -54,23 +54,39 @@
 
 // form.append('parent_id', '0');
 
-const BaseUrl = "https://www.box.net/api/1.0/rest?action=get_ticket&api_key=fdf45ekhg6vamm0nbo8ul9njzdkfe3p2";
+const BaseUrl = "https://www.box.net/api/1.0/rest?action=get_ticket";
 
 let api_key = "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2";
 
-function boxAPI (url, api_key, callback) {
-	$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'		https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_ticket%26api_key%3D" + api_key + "'&amp;format=json&amp;diagnostics=true",
+let auth_token = "bUuexcdNEzGqu3E1Uz59xj1hZyEhRbtS";
+
+let folder_id = "0";
+
+function boxAPI (url, api_key) {
+	$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'" + url +	"%26api_key%3D" + api_key + "'&amp;format=json&amp;diagnostics=true",
 			   function(response) {
+			   			console.log(response)
 						window.ticket = response.query.results.response.ticket;
 						window.location.href = 'https://m.box.net/api/1.0/auth/' + ticket;
+
 				}
 			  );
+}
+
+function getMeAFile (token, key, folder) { 
+	$.getJSON("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_account_tree%26auth_token%3D" + token + "%26api_key%3D" + key + "%26folder_id%3D" + folder + "%26params[]%3Donelevel%26params[]%3Dnozip'&amp;format=json&amp;diagnostics=true", 
+		function(response) {
+			console.log(response)
+		}
+	);
 }
 
 
 
 
 $(".submit").on("click", function (){
+
+	
 
 	event.preventDefault();
 
@@ -80,10 +96,10 @@ $(".submit").on("click", function (){
 
 	console.log("BLAHHAHAH");
 
-	boxAPI(BaseUrl, "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2", function(response){
-		console.log(response)
-	});
+	boxAPI(BaseUrl, "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2");
 	// event.preventDefault();
+
+	getMeAFile(auth_token, api_key, folder_id);
 
 	// console.log(uploadFile);
 
