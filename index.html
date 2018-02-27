@@ -4,6 +4,12 @@
 	<title>Box API Test App</title>
 </head>
 <body>
+<h1>Box API Test App</h1>
+		
+			Audio File: <input type="file" name="file" class="file">
+			
+			<button name="submit" type="submit" class="submit">Submit File</button>
+
 <script type="text/javascript" src="https://cdn01.boxcdn.net/js/static/select.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -50,10 +56,10 @@
 
 const BaseUrl = "https://www.box.net/api/1.0/rest?action=get_ticket&api_key=fdf45ekhg6vamm0nbo8ul9njzdkfe3p2";
 
-let window.api_key = "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2";
+let api_key = "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2";
 
 function boxAPI (url, api_key, callback) {
-	$.getJSON("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'		https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_ticket%26api_key%3D" + window.		 api_key + "'&amp;format=json&amp;diagnostics=true",
+	$.getJSON("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'		https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_ticket%26api_key%3D" + api_key + "'&amp;format=json&amp;diagnostics=true",
 			   function(response) {
 						window.ticket = response.query.results.response.ticket;
 						window.location.href = 'https://m.box.net/api/1.0/auth/' + ticket;
@@ -64,9 +70,11 @@ function boxAPI (url, api_key, callback) {
 
 
 
-$("#submit").on("click", function (){
+$(".submit").on("click", function (){
 
 	event.preventDefault();
+
+	console.log("BLAHHAHAH");
 
 	boxAPI(BaseUrl, "fdf45ekhg6vamm0nbo8ul9njzdkfe3p2", function(response){
 		console.log(response)
@@ -95,11 +103,7 @@ $("#submit").on("click", function (){
 });
 </script>
 
-	<h1>Box API Test App</h1>
-		
-			Audio File: <input type="file" name="file" class="file">
-			
-			<button name="submit" type="submit" class="submit">Submit File</button>
+	
 
 	
 </body>
