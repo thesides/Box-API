@@ -67,6 +67,7 @@ function boxAPI (url, api_key) {
 			   function(response) {
 			   			console.log(response)
 						window.ticket = response.query.results.response.ticket;
+						console.log(window.ticket)
 						window.location.href = 'https://m.box.net/api/1.0/auth/' + ticket;
 
 				}
@@ -74,7 +75,7 @@ function boxAPI (url, api_key) {
 }
 
 function getMeAFile (token, key, folder) { 
-	$.getJSON("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_account_tree%26auth_token%3D" + token + "%26api_key%3D" + key + "%26folder_id%3D" + folder + "%26params[]%3Donelevel%26params[]%3Dnozip'&amp;format=json&amp;diagnostics=true", 
+	$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20'https%3A%2F%2Fwww.box.net%2Fapi%2F1.0%2Frest%3Faction%3Dget_account_tree%26auth_token%3D" + token + "%26api_key%3D" + key + "%26folder_id%3D" + folder + "%26params[]%3Donelevel%26params[]%3Dnozip'&amp;format=json&amp;diagnostics=true", 
 		function(response) {
 			console.log(response)
 		}
